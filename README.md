@@ -1,17 +1,8 @@
-# Vue 3, TypeScript & Tailwind CSS Starter
-
-> A simple, Vue 3 starter with TypeScript support
-
-[Demo/Installation](https://vue3-typescript-tailwind-starter.vercel.app/)
-
 ## Features
 
 - Vue 3
 - TypeScript
 - Tailwind CSS
-- Simple store with global state
-- Vue Router
-- ESLint
 
 ## Project setup and usage
 

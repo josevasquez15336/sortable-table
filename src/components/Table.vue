@@ -142,9 +142,12 @@ const filteredColumns = computed(() => {
     columns = sortedColumns.value.filter((item) => {
       const fieldValue = item[field];
       if (typeof fieldValue === "number") {
-        return fieldValue.toString().toLowerCase().includes(value);
+        return fieldValue
+          .toString()
+          .toLowerCase()
+          .includes(value.toLowerCase());
       }
-      return fieldValue.toLowerCase().includes(value);
+      return fieldValue.toLowerCase().includes(value.toLowerCase());
     });
   }
   return columns;
