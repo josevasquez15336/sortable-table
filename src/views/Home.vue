@@ -1,12 +1,12 @@
 <template>
   <div class="w-screen h-screen p-8 overflow-auto bg-slate-600">
-    <SortableTableVue :columns="tableColumns" :table-data="tableData" />
+    <Table :columns="tableColumns" :table-data="tableData" />
   </div>
 </template>
 
 <script lang="ts" setup>
 import { computed, Ref } from "vue";
-import SortableTableVue from "../components/SortableTable.vue";
+import Table from "../components/Table.vue";
 import { useFetch } from "../composables/useFetch";
 import { Baremetrics, FeatureEditionsItem } from "../types/Metrics";
 import { TableColumn } from "../types/Table";

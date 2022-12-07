@@ -1,6 +1,6 @@
 <template>
   <table
-    class="w-full max-w-5xl min-h-full mx-auto overflow-hidden text-sm text-left text-gray-500 shadow-xl table-auto dark:text-gray-400 rounded-xl"
+    class="w-full max-w-5xl min-h-full mx-auto overflow-hidden text-sm text-left text-gray-500 bg-gray-800 shadow-xl table-auto dark:text-gray-400 rounded-xl"
   >
     <thead
       class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
@@ -104,6 +104,7 @@ const menuOpenByFieldID = ref("");
 const sortedBy = ref({ field: "", desc: false });
 const filteredBy = ref({ field: "", value: "" });
 
+// Sort columns descending and ascending by "field," which is the key to mapping columns data with table data
 const sortedColumns = computed(() => {
   let columns = props.tableData;
   const { field, desc } = sortedBy.value;
@@ -133,6 +134,7 @@ const sortedColumns = computed(() => {
   return columns;
 });
 
+// Filter columns based on sorted columns by field, which is the key to mapping columns data with table data
 const filteredColumns = computed(() => {
   let columns = sortedColumns.value;
   const { field, value } = filteredBy.value;
