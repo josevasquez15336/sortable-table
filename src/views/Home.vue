@@ -1,5 +1,4 @@
 <template>
-  <!-- <div class=""> -->
   <div class="w-screen h-screen p-8 overflow-auto bg-slate-900">
     <table
       v-if="data"
@@ -31,7 +30,9 @@
               {{ edition.edition.name }}
             </span>
           </td>
-          <td class="px-4 py-2">{{ feature.timeOfScreenshot }}</td>
+          <td class="px-4 py-2">
+            {{ isoStringToFormatDate(feature.timeOfScreenshot) }}
+          </td>
         </tr>
       </tbody>
     </table>
@@ -39,7 +40,9 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, onMounted, ref } from "vue";
+import { computed, onMounted, Ref, ref } from "vue";
+import { isoStringToFormatDate } from "../utils/dateUtils";
+import { useFetch } from "../composables/useFetch";
 interface Metrics {
   id: string;
   name: string;
@@ -90,8 +93,8 @@ interface Metrics {
 }
 
 // Define a reactive property to store the fetched data
-const data = ref<null | Metrics>(null);
 const apiUrl = "https://content.launchbrightly.com/lbdemo/baremetrics.json";
+const { data }: { data: Ref<Metrics | null> } = useFetch(apiUrl);
 const features = computed(() => {
   if (data.value) {
     return data.value.features.items;
