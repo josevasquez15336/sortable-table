@@ -104,11 +104,10 @@ const menuOpenByFieldID = ref("");
 const sortedBy = ref({ field: "", desc: false });
 const filteredBy = ref({ field: "", value: "" });
 
-// Sort columns descending and ascending by "field," which is the key to mapping columns data with table data
+// Use a computed property to sort the table data by the current sorting state.
 const sortedColumns = computed(() => {
   let columns = props.tableData;
   const { field, desc } = sortedBy.value;
-
   if (props.tableData && field) {
     columns = desc
       ? props.tableData.sort((a, b) => {
@@ -134,7 +133,7 @@ const sortedColumns = computed(() => {
   return columns;
 });
 
-// Filter columns based on sorted columns by field, which is the key to mapping columns data with table data
+// Use a computed property to filter the sorted table data by the current filtering state.
 const filteredColumns = computed(() => {
   let columns = sortedColumns.value;
   const { field, value } = filteredBy.value;
@@ -153,9 +152,8 @@ const filteredColumns = computed(() => {
   return columns;
 });
 
+// Define a function to apply the appropriate transformation to a table cell value based on the transform key.
 const handleTransform = (value: any, transformKey: "date") => {
-  // this function uses a map to easily extend and map transform functionality
-  // let table handleTransform function open for extension but closed for modification
   const transformMap = {
     date: isoStringToFormatDate,
   };

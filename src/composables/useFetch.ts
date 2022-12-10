@@ -1,7 +1,7 @@
 import { ref } from "vue";
 
 export const useFetch = (url: string) => {
-  // Define a reactive property to store the fetched data on a vue compaosable
+  // Define a reactive property to store the fetched data on a vue composable
   const data = ref(null);
   const error = ref(null);
   // Use the fetch function to retrieve data from an API endpoint

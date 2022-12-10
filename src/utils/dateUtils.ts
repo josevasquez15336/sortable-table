@@ -1,4 +1,4 @@
-// Filters are removed from Vue 3.0 and are no longer supported. therefore decided to create a date util to avoid displaying isoString format.
+// Filters are removed from Vue 3.0 and are no longer supported, create a date util to avoid displaying isoString format.
 
 const formatDate = (date: Date) => {
   const options = {

@@ -12,10 +12,7 @@
 <script lang="ts" setup>
 import { PropType } from "vue";
 import { iconsMap, Icons } from "../utils/iconsMap";
-/*
-Create component to handle dynamic and async icons SVG components;
- to conditionally render any number of individual async elements and logic to individual elements.
-*/
+/* Use the iconsMap object to async render the appropriate SVG icon based on the icon prop value.*/
 const props = defineProps({
   icon: {
     type: String as PropType<Icons>,
