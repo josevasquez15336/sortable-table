@@ -4,16 +4,16 @@
 
 The task has the following features:
 
-The Vue application fetches a public JSON file and displays its data in a table.
-The Vue application is styled using TailwindCSS and is responsive.
-The table columns can be sorted.
-The table columns can be filtered.
-The Vue application contains unit tests.
-The Vue application is hosted on a web server and can be accessed via a URL.
+    1. The Vue application fetches a public JSON file and displays its data in a table.
+    2. The Vue application is styled using TailwindCSS and is responsive.
+    3. The table columns can be sorted.
+    4. The table columns can be filtered.
+    5. The Vue application contains unit tests.
+    6. The Vue application is hosted on a web server and can be accessed via a URL.
 
 ## Hosted Application
 
-The Vue application can be accessed at the following URL:
+The Vue application can be accessed at the following [URL](https://sortable-table-30f2a.web.app)
 
 ## Project setup and usage
 
@@ -30,7 +30,7 @@ npm run dev
 
 ```
 
-Run uni tests:
+Run unit tests:
 
 ```
 npm run test:unit
