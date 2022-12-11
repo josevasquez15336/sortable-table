@@ -59,6 +59,7 @@
                   @searching="filteredBy.field = column.field"
                   v-model:input="filteredBy.value"
                   :placeholder="`Search for ${column.label}`"
+                  :status="filteredBy.status"
                 />
               </template>
             </DropDownMenu>
@@ -91,6 +92,7 @@ import { TableColumn } from "../types/Table";
 import Button from "./Button.vue";
 import DropDownMenu from "./DropDownMenu.vue";
 import SearchBar from "./SearchBar.vue";
+import { SearchBarStatus } from "../types/SearchBar";
 
 const props = defineProps({
   columns: {
@@ -104,8 +106,13 @@ const props = defineProps({
 });
 
 const menuOpenByFieldID = ref("");
+
 const sortedBy = ref({ field: "", desc: false });
-const filteredBy = ref({ field: "", value: "" });
+const filteredBy = ref<{
+  field: string;
+  value: string;
+  status: SearchBarStatus;
+}>({ field: "", value: "", status: "active" });
 
 // Use a computed property to sort the table data by the current sorting state.
 const sortedColumns = computed(() => {
@@ -139,19 +146,23 @@ const sortedColumns = computed(() => {
 // Use a computed property to filter the sorted table data by the current filtering state.
 const filteredColumns = computed(() => {
   let columns = sortedColumns.value;
+  let searchBarStatus: SearchBarStatus = "errored";
   const { field, value } = filteredBy.value;
   if (field && value) {
-    columns = sortedColumns.value.filter((item) => {
-      const fieldValue = item[field];
+    const filteredColumns = sortedColumns.value.filter((item) => {
+      let fieldValue = item[field];
       if (typeof fieldValue === "number") {
-        return fieldValue
-          .toString()
-          .toLowerCase()
-          .includes(value.toLowerCase());
+        fieldValue = fieldValue.toString();
       }
       return fieldValue.toLowerCase().includes(value.toLowerCase());
     });
+
+    if (filteredColumns.length > 0) {
+      searchBarStatus = "active";
+      columns = filteredColumns;
+    }
   }
+  filteredBy.value.status = searchBarStatus;
   return columns;
 });
 
