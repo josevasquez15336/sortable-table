@@ -11,8 +11,6 @@ describe("Button", () => {
     //check if the classes method on the mounted component returns the expected array of CSS class names for the default state of the button.
     expect(defaultButton.classes()).toEqual([
       "p-2",
-      "mr-2",
-      "mb-2",
       "text-sm",
       "rounded-lg",
       "font-medium",
@@ -41,8 +39,6 @@ describe("Button", () => {
     // check if the classes method on the mounted component returns the expected array of CSS class names for the active state of the button.
     expect(activeButton.classes()).toEqual([
       "p-2",
-      "mr-2",
-      "mb-2",
       "text-sm",
       "rounded-lg",
       "font-medium",

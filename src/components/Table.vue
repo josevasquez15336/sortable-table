@@ -1,6 +1,6 @@
 <template>
   <table
-    class="w-full max-w-5xl min-h-full mx-auto overflow-hidden text-sm text-left text-gray-500 bg-gray-800 shadow-xl table-auto dark:text-gray-400 rounded-xl"
+    class="w-full max-w-5xl min-h-full mx-auto text-sm text-left text-gray-500 bg-gray-800 table-auto dark:text-gray-400 rounded-xl"
   >
     <thead
       class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
@@ -16,53 +16,56 @@
               :icon="'down-arrow'"
             >
             </Button>
-            <DropDownMenu
-              v-if="menuOpenByFieldID === column.field"
-              :has-filter="column.hasFilter"
-              @close="menuOpenByFieldID = ''"
-              class="absolute top-0 left-0 z-40"
-            >
-              <template #heading>
-                {{ column.label }}
-                <Button
-                  class="min-w-[32px] min-h-[24px] max-w-[32px] max-h-[32px] ml-2"
-                  @click="menuOpenByFieldID = ''"
-                  :icon="'up-arrow'"
-                ></Button>
-              </template>
-              <template #ascending>
-                Sort ascending
-                <Button
-                  @click="
-                    sortedBy = { field: column.field, desc: false };
-                    menuOpenByFieldID = '';
-                  "
-                  class="min-w-[32px] min-h-[24px] max-w-[32px] max-h-[32px] ml-2"
-                  id="sort-ascending-button"
-                  :icon="'sort-up'"
-                ></Button>
-              </template>
-              <template #descending>
-                Sort descending
-                <Button
-                  class="min-w-[32px] min-h-[24px] max-w-[32px] max-h-[32px] ml-2"
-                  @click="
-                    sortedBy = { field: column.field, desc: true };
-                    menuOpenByFieldID = '';
-                  "
-                  id="sort-descending-button"
-                  :icon="'sort-down'"
-                ></Button>
-              </template>
-              <template #filter>
-                <SearchBar
-                  @searching="filteredBy.field = column.field"
-                  v-model:input="filteredBy.value"
-                  :placeholder="`Search for ${column.label}`"
-                  :status="filteredBy.status"
-                />
-              </template>
-            </DropDownMenu>
+            <Transition name="bounce">
+              <DropDownMenu
+                v-if="menuOpenByFieldID === column.field"
+                :has-filter="column.hasFilter"
+                @close="menuOpenByFieldID = ''"
+                class="absolute top-0 left-0"
+              >
+                <template #heading>
+                  {{ column.label }}
+                  <Button
+                    class="min-w-[24px] min-h-[24px] max-w-[24px] max-h-[24px] ml-2"
+                    state="active"
+                    @click="menuOpenByFieldID = ''"
+                    :icon="'up-arrow'"
+                  ></Button>
+                </template>
+                <template #ascending>
+                  Sort ascending
+                  <Button
+                    @click="
+                      sortedBy = { field: column.field, desc: false };
+                      menuOpenByFieldID = '';
+                    "
+                    class="min-w-[32px] min-h-[24px] max-w-[32px] max-h-[32px] ml-2"
+                    id="sort-ascending-button"
+                    :icon="'sort-up'"
+                  ></Button>
+                </template>
+                <template #descending>
+                  Sort descending
+                  <Button
+                    class="min-w-[32px] min-h-[24px] max-w-[32px] max-h-[32px] ml-2"
+                    @click="
+                      sortedBy = { field: column.field, desc: true };
+                      menuOpenByFieldID = '';
+                    "
+                    id="sort-descending-button"
+                    :icon="'sort-down'"
+                  ></Button>
+                </template>
+                <template #filter>
+                  <SearchBar
+                    @searching="filteredBy.field = column.field"
+                    v-model:input="filteredBy.value"
+                    :placeholder="`Search for ${column.label}`"
+                    :status="filteredBy.status"
+                  />
+                </template>
+              </DropDownMenu>
+            </Transition>
           </div>
         </th>
       </tr>
@@ -175,3 +178,23 @@ const handleTransform = (value: any, transformKey: "date") => {
   return transformMap[transformKey](value);
 };
 </script>
+
+<style>
+.bounce-enter-active {
+  animation: bounce-in 0.2s;
+}
+.bounce-leave-active {
+  animation: bounce-in 0.2s reverse;
+}
+@keyframes bounce-in {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+</style>

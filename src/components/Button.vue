@@ -1,7 +1,7 @@
 <template>
   <button
     type="button"
-    :class="`p-2 mr-2 mb-2 text-sm rounded-lg font-medium focus:outline-none  focus:ring-4 ${buttonClass}`"
+    :class="`p-2  text-sm rounded-lg font-medium focus:outline-none  focus:ring-4 ${buttonClass}`"
   >
     {{ label }}
 
