@@ -14,7 +14,7 @@
 </template>
 <script lang="ts" setup>
 import { computed, PropType } from "vue";
-import { Icons } from "../utils/iconsMap";
+import { Icons } from "../types/Icons";
 import Icon from "./Icon.vue";
 
 //Define a buttonStateClassesMap object that maps button state names to their corresponding CSS class names.

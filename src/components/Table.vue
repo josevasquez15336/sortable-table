@@ -145,8 +145,7 @@ const sortedColumns = computed(() => {
 
 // Use a computed property to filter the sorted table data by the current filtering state.
 const filteredColumns = computed(() => {
-  let columns = sortedColumns.value;
-  let searchBarStatus: SearchBarStatus = "errored";
+  //let columns = sortedColumns.value;
   const { field, value } = filteredBy.value;
   if (field && value) {
     const filteredColumns = sortedColumns.value.filter((item) => {
@@ -157,13 +156,15 @@ const filteredColumns = computed(() => {
       return fieldValue.toLowerCase().includes(value.toLowerCase());
     });
 
-    if (filteredColumns.length > 0) {
-      searchBarStatus = "active";
-      columns = filteredColumns;
+    if (filteredColumns.length === 0) {
+      filteredBy.value.status = "errored";
+      return sortedColumns.value;
     }
+    filteredBy.value.status = "active";
+    return filteredColumns;
   }
-  filteredBy.value.status = searchBarStatus;
-  return columns;
+  filteredBy.value.status = "active";
+  return sortedColumns.value;
 });
 
 // Define a function to apply the appropriate transformation to a table cell value based on the transform key.

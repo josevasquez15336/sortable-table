@@ -11,7 +11,8 @@
 </template>
 <script lang="ts" setup>
 import { PropType } from "vue";
-import { iconsMap, Icons } from "../utils/iconsMap";
+import { iconsMap } from "../utils/iconsMap";
+import { Icons } from "../types/Icons";
 /* Use the iconsMap object to async render the appropriate SVG icon based on the icon prop value.*/
 const props = defineProps({
   icon: {

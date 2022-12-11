@@ -20,5 +20,3 @@ export const iconsMap = {
   ),
   search: defineAsyncComponent(() => import("../components/icons/search.vue")),
 };
-
-export type Icons = keyof typeof iconsMap;
