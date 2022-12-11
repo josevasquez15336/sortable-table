@@ -12,6 +12,7 @@
             <Button
               @click="menuOpenByFieldID = column.field"
               class="min-w-[32px] min-h-[24px] max-w-[32px] max-h-[32px] ml-2"
+              id="open-menu"
               :icon="'down-arrow'"
             >
             </Button>
@@ -37,6 +38,7 @@
                     menuOpenByFieldID = '';
                   "
                   class="min-w-[32px] min-h-[24px] max-w-[32px] max-h-[32px] ml-2"
+                  id="sort-ascending-button"
                   :icon="'sort-up'"
                 ></Button>
               </template>
@@ -48,6 +50,7 @@
                     sortedBy = { field: column.field, desc: true };
                     menuOpenByFieldID = '';
                   "
+                  id="sort-descending-button"
                   :icon="'sort-down'"
                 ></Button>
               </template>
