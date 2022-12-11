@@ -90,8 +90,12 @@
 
 <script lang="ts" setup>
 import { computed, PropType, ref } from "vue";
-import { isoStringToFormatDate } from "../utils/dateUtils";
-import { TableColumn } from "../types/Table";
+import { transformationMap } from "../utils/tableCellTransformationMap";
+import {
+  TableColumn,
+  TableCellTransformation,
+  TableCell,
+} from "../types/Table";
 import Button from "./Button.vue";
 import DropDownMenu from "./DropDownMenu.vue";
 import SearchBar from "./SearchBar.vue";
@@ -103,7 +107,7 @@ const props = defineProps({
     required: true,
   },
   tableData: {
-    type: Array as PropType<Record<string, number | string>[]>,
+    type: Array as PropType<Record<string, TableCell>[]>,
     required: true,
   },
 });
@@ -119,10 +123,9 @@ const filteredBy = ref<{
 
 // Use a computed property to sort the table data by the current sorting state.
 const sortedColumns = computed(() => {
-  let columns = props.tableData;
   const { field, desc } = sortedBy.value;
   if (props.tableData && field) {
-    columns = desc
+    return desc
       ? props.tableData.sort((a, b) => {
           const aVal = a[field];
           const bVal = b[field];
@@ -142,8 +145,7 @@ const sortedColumns = computed(() => {
           return 1;
         });
   }
-
-  return columns;
+  return props.tableData;
 });
 
 // Use a computed property to filter the sorted table data by the current filtering state.
@@ -153,7 +155,7 @@ const filteredColumns = computed(() => {
   if (field && value) {
     const filteredColumns = sortedColumns.value.filter((item) => {
       let fieldValue = item[field];
-      if (typeof fieldValue === "number") {
+      if (typeof fieldValue !== "string") {
         fieldValue = fieldValue.toString();
       }
       return fieldValue.toLowerCase().includes(value.toLowerCase());
@@ -171,11 +173,11 @@ const filteredColumns = computed(() => {
 });
 
 // Define a function to apply the appropriate transformation to a table cell value based on the transform key.
-const handleTransform = (value: any, transformKey: "date") => {
-  const transformMap = {
-    date: isoStringToFormatDate,
-  };
-  return transformMap[transformKey](value);
+const handleTransform = (
+  value: TableCell,
+  transformKey: TableCellTransformation
+) => {
+  return transformationMap[transformKey](value);
 };
 </script>
 

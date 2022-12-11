@@ -1,7 +1,5 @@
 /*
- SVG Vue components; this utility allow extending and async import easily and use SVG  like any other Vue component
- This method includes all of the goodies you get using Vue. For example, defineAsyncComponent would allow tree shake
- if the list is too long, get access to things like props and logic if needed.
+  These svg components will be loaded and rendered async and dynamically based on the given key.
  */
 import { defineAsyncComponent } from "vue";
 
@@ -19,4 +17,5 @@ export const iconsMap = {
     () => import("../components/icons/sort-down.vue")
   ),
   search: defineAsyncComponent(() => import("../components/icons/search.vue")),
+  // Add more async svg icons components here as needed.
 };
